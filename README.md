@@ -1,2 +1,2 @@
-# DroneFollower
-ROS and Gazebo implementation of drone CV/Object Tracking and Following
+#TurtlebotFollower
+ROS and Gazebo implementation of Turtlebot Waffle CV/Object Tracking and Following
