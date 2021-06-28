@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/lorenz/Projects/ROS/TurtlebotFollower/build/devel/setup.sh

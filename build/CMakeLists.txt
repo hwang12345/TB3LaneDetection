@@ -10,5 +10,5 @@ find_package(catkin REQUIRED COMPONENTS
 )
 include_directories(${OpenCV_INCLUDE_DIRS}) 
 include_directories(${catkin_INCLUDE_DIRS})
-add_executable( cvBridgeTest ./src/cvBridgeTest.cpp )
+add_executable( cvBridgeTest ../src/cvBridgeTest.cpp )
 target_link_libraries( cvBridgeTest ${OpenCV_LIBRARIES} ${catkin_LIBRARIES} ) 
