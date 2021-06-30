@@ -9,15 +9,18 @@
 // #define IMAGE_CONVERTER
 
 class ImageConverter {
+    public:
         ros::NodeHandle nh_;
         image_transport::ImageTransport it_;
         image_transport::Subscriber image_sub_;
         image_transport::Publisher image_pub_;
         cv::Mat cv_img;
-    public:
+        cv_bridge::CvImagePtr cv_ptr;
+        int i;
+
         ImageConverter();
         //~ImageConverter();
         void ImageCallBack(const sensor_msgs::ImageConstPtr &msg);
-        cv::Mat& get_img() { return cv_img; };
-        void testMe();
+        //cv::Mat get_img() { return cv_img; };
+        //cv_bridge::CvImagePtr get_ptr() { return cv_ptr; };
 };
