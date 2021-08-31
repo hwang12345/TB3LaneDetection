@@ -16,11 +16,8 @@ class ImageConverter {
         image_transport::Publisher image_pub_;
         cv::Mat cv_img;
         cv_bridge::CvImagePtr cv_ptr;
-        int i;
 
         ImageConverter();
-        //~ImageConverter();
+        ~ImageConverter();
         void ImageCallBack(const sensor_msgs::ImageConstPtr &msg);
-        //cv::Mat get_img() { return cv_img; };
-        //cv_bridge::CvImagePtr get_ptr() { return cv_ptr; };
 };
