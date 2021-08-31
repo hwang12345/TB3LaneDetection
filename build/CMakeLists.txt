@@ -11,5 +11,5 @@ find_package(catkin REQUIRED COMPONENTS
 include_directories(${OpenCV_INCLUDE_DIRS}) 
 include_directories(${catkin_INCLUDE_DIRS})
 include_directories(/home/lorenz/Projects/ROS/TurtlebotFollower/include)
-add_executable( ROSImage ../src/image_converter.cpp)
+add_executable( ROSImage ../src/image_converter.cpp ../include/lane_detection.h)
 target_link_libraries( ROSImage ${OpenCV_LIBRARIES} ${catkin_LIBRARIES})
