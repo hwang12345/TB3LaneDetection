@@ -11,7 +11,7 @@
 static const std::string OPENCV_WINDOW = "Image window";
 
 // Instantiate
-ImageProcessor detector;
+ImageProcessor img_proc;
 
 class ImageConverter
 {
@@ -50,11 +50,15 @@ public:
             return;
         }
 
+        // Access cv::Mat image from pointer
+        cv::Mat cv_img = cv_ptr->image;
+
+
         // Draw an example circle on the video stream
-        cv_ptr = detector.drawCircle(cv_ptr);
+        cv::Mat cv_img_procd = img_proc.process_image(cv_img);
 
         // Update GUI Window
-        cv::imshow(OPENCV_WINDOW, cv_ptr->image);
+        cv::imshow(OPENCV_WINDOW, cv_img_procd);
         cv::waitKey(3);
 
         // Output modified video stream

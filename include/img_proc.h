@@ -20,6 +20,8 @@ using namespace std;
 
 class ImageProcessor {
 public:
-    CvImagePtr drawCircle(CvImagePtr cv_ptr);
+
+
+    Mat process_image(Mat cv_img);
 
 };
