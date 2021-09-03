@@ -21,7 +21,7 @@ using namespace std;
 class ImageProcessor {
 public:
 
-
+    Mat birdseye_view(Mat org_img);
     Mat process_image(Mat cv_img);
 
 };
