@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 project( ROSImage )
 find_package( OpenCV REQUIRED) 
 find_package(catkin REQUIRED COMPONENTS
@@ -11,5 +11,5 @@ find_package(catkin REQUIRED COMPONENTS
 include_directories(${OpenCV_INCLUDE_DIRS}) 
 include_directories(${catkin_INCLUDE_DIRS})
 include_directories(/home/lorenz/Projects/ROS/TurtlebotFollower/include)
-add_executable( ROSImage ../src/image_converter.cpp ../include/lane_detection.h)
+add_executable( ROSImage ../src/image_converter.cpp ../include/img_proc.cpp ../include/img_proc.h)
 target_link_libraries( ROSImage ${OpenCV_LIBRARIES} ${catkin_LIBRARIES})

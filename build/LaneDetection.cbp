@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6"/>
 	<Project>
-		<Option title="LaneDetection"/>
+		<Option title="ImageProcessor"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
 		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\opencv4\;CMake Files\..\..\..\..\..\..\usr\src\;CMake Files\..\..\..\..\..\..\usr\src\googletest\;CMake Files\..\..\..\..\..\..\usr\src\googletest\googlemock\;CMake Files\..\..\..\..\..\..\usr\src\googletest\googletest\;CMake Files\..\..\..\..\..\..\usr\src\googletest\googletest\cmake\;CMake Files\..\..\..\..\..\..\opt\;CMake Files\..\..\..\..\..\..\opt\ros\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\catkin\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\catkin\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\catkin\cmake\platform\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\catkin\cmake\test\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\catkin\cmake\tools\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\catkin\cmake\templates\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\cv_bridge\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\cv_bridge\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\rosconsole\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\rosconsole\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\cpp_common\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\cpp_common\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\rostime\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\rostime\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\sensor_msgs\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\sensor_msgs\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\geometry_msgs\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\geometry_msgs\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\message_runtime\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\message_runtime\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\roscpp_serialization\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\roscpp_serialization\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\roscpp_traits\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\roscpp_traits\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\std_msgs\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\std_msgs\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\image_transport\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\image_transport\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\message_filters\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\message_filters\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\roscpp\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\roscpp\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\rosgraph_msgs\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\rosgraph_msgs\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\xmlrpcpp\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\xmlrpcpp\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\pluginlib\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\pluginlib\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\class_loader\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\class_loader\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\roslib\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\roslib\cmake\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\rospack\;CMake Files\..\..\..\..\..\..\opt\ros\noetic\share\rospack\cmake\;CMake Files\catkin\;CMake Files\catkin\catkin_generated\;CMake Files\catkin\catkin_generated\version\;CMake Files\catkin_generated\;CMake Files\catkin_generated\installspace\;"/>
@@ -57,15 +57,15 @@
 					<DistClean command="/usr/bin/make -j16 -f &quot;/home/lorenz/Projects/ROS/TurtlebotFollower/build/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="LaneDetection">
-				<Option output="/home/lorenz/Projects/ROS/TurtlebotFollower/build/LaneDetection" prefix_auto="0" extension_auto="0"/>
+			<Target title="ImageProcessor">
+				<Option output="/home/lorenz/Projects/ROS/TurtlebotFollower/build/ImageProcessor" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/lorenz/Projects/ROS/TurtlebotFollower/build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-DROS_BUILD_SHARED_LIBS=1"/>
-					<Add option="-DROS_PACKAGE_NAME=&quot;LaneDetection&quot;"/>
+					<Add option="-DROS_PACKAGE_NAME=&quot;ImageProcessor&quot;"/>
 					<Add option="-DROSCONSOLE_BACKEND_LOG4CXX"/>
 					<Add directory="/opt/ros/noetic/include"/>
 					<Add directory="/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"/>
@@ -81,21 +81,21 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/lorenz/Projects/ROS/TurtlebotFollower/build/Makefile&quot;  VERBOSE=1 LaneDetection"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/lorenz/Projects/ROS/TurtlebotFollower/build/Makefile&quot;  VERBOSE=1 ImageProcessor"/>
 					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/lorenz/Projects/ROS/TurtlebotFollower/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j16 -f &quot;/home/lorenz/Projects/ROS/TurtlebotFollower/build/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j16 -f &quot;/home/lorenz/Projects/ROS/TurtlebotFollower/build/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="LaneDetection/fast">
-				<Option output="/home/lorenz/Projects/ROS/TurtlebotFollower/build/LaneDetection" prefix_auto="0" extension_auto="0"/>
+			<Target title="ImageProcessor/fast">
+				<Option output="/home/lorenz/Projects/ROS/TurtlebotFollower/build/ImageProcessor" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/lorenz/Projects/ROS/TurtlebotFollower/build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-DROS_BUILD_SHARED_LIBS=1"/>
-					<Add option="-DROS_PACKAGE_NAME=&quot;LaneDetection&quot;"/>
+					<Add option="-DROS_PACKAGE_NAME=&quot;ImageProcessor&quot;"/>
 					<Add option="-DROSCONSOLE_BACKEND_LOG4CXX"/>
 					<Add directory="/opt/ros/noetic/include"/>
 					<Add directory="/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"/>
@@ -111,7 +111,7 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/lorenz/Projects/ROS/TurtlebotFollower/build/Makefile&quot;  VERBOSE=1 LaneDetection/fast"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/lorenz/Projects/ROS/TurtlebotFollower/build/Makefile&quot;  VERBOSE=1 ImageProcessor/fast"/>
 					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/lorenz/Projects/ROS/TurtlebotFollower/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j16 -f &quot;/home/lorenz/Projects/ROS/TurtlebotFollower/build/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j16 -f &quot;/home/lorenz/Projects/ROS/TurtlebotFollower/build/Makefile&quot;  VERBOSE=1 clean"/>
@@ -657,13 +657,13 @@
 			</Target>
 		</Build>
 		<Unit filename="/home/lorenz/Projects/ROS/TurtlebotFollower/include/image_converter.h">
-			<Option target="LaneDetection"/>
+			<Option target="ImageProcessor"/>
 		</Unit>
-		<Unit filename="/home/lorenz/Projects/ROS/TurtlebotFollower/src/LaneDetection.cpp">
-			<Option target="LaneDetection"/>
+		<Unit filename="/home/lorenz/Projects/ROS/TurtlebotFollower/src/ImageProcessor.cpp">
+			<Option target="ImageProcessor"/>
 		</Unit>
 		<Unit filename="/home/lorenz/Projects/ROS/TurtlebotFollower/src/image_converter.cpp">
-			<Option target="LaneDetection"/>
+			<Option target="ImageProcessor"/>
 		</Unit>
 		<Unit filename="/usr/src/googletest/googlemock/src/gmock-all.cc">
 			<Option target="gmock"/>

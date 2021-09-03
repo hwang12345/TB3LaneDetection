@@ -5,7 +5,13 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
+#include <img_proc.h>
+
+// Define CV2 window name
 static const std::string OPENCV_WINDOW = "Image window";
+
+// Instantiate
+ImageProcessor detector;
 
 class ImageConverter
 {
@@ -18,10 +24,10 @@ public:
     ImageConverter()
             : it_(nh_)
     {
-        // Subscrive to input video feed and publish output video feed
-        image_sub_ = it_.subscribe("/camera/image", 1,
+        // Subscribe to input video feed and publish output video feed
+        this->image_sub_ = it_.subscribe("/camera/image", 1,
                                    &ImageConverter::imageCb, this);
-        image_pub_ = it_.advertise("/image_converter/output_video", 1);
+        this->image_pub_ = it_.advertise("/image_converter/output_video", 1);
 
         cv::namedWindow(OPENCV_WINDOW);
     }
@@ -45,8 +51,7 @@ public:
         }
 
         // Draw an example circle on the video stream
-        if (cv_ptr->image.rows > 60 && cv_ptr->image.cols > 60)
-            cv::circle(cv_ptr->image, cv::Point(50, 50), 10, CV_RGB(255,0,0));
+        cv_ptr = detector.drawCircle(cv_ptr);
 
         // Update GUI Window
         cv::imshow(OPENCV_WINDOW, cv_ptr->image);

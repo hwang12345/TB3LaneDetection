@@ -1,8 +1,0 @@
-//
-// Created by lorenz on 31.08.21.
-//
-
-#ifndef ROSIMAGE_LANE_DETECTION_H
-#define ROSIMAGE_LANE_DETECTION_H
-
-#endif //ROSIMAGE_LANE_DETECTION_H
