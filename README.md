@@ -1,2 +1,2 @@
-# TurtlebotFollower
-ROS and Gazebo implementation of Turtlebot Waffle CV/Object Tracking and Following
+# TB3 Lane Detection
+ROS and Gazebo implementation of Turtlebot 3 lane detection algorithm.
