@@ -668,7 +668,7 @@
 		<Unit filename="/home/lorenz/Projects/ROS/TurtlebotFollower/include/lane_detection.h">
 			<Option target="ROSImage"/>
 		</Unit>
-		<Unit filename="/home/lorenz/Projects/ROS/TurtlebotFollower/src/image_converter.cpp">
+		<Unit filename="/home/lorenz/Projects/ROS/TurtlebotFollower/src/display.cpp">
 			<Option target="ROSImage"/>
 		</Unit>
 		<Unit filename="/usr/src/googletest/googlemock/src/gmock-all.cc">

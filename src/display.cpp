@@ -14,7 +14,7 @@ static const std::string OPENCV_WINDOW = "Image window";
 // Instantiate
 ImageProcessor img_proc;
 
-class ImageConverter
+class DisplayROSImage
 {
     ros::NodeHandle nh_;
     image_transport::ImageTransport it_;
@@ -22,12 +22,12 @@ class ImageConverter
     image_transport::Publisher image_pub_;
 
 public:
-    ImageConverter()
+    DisplayROSImage()
             : it_(nh_)
     {
         // Subscribe to input video feed and publish output video feed
         image_sub_ = it_.subscribe("/camera/image", 1,
-                                   &ImageConverter::imageCb, this);
+                                   &DisplayROSImage::imageCb, this);
         image_pub_ = it_.advertise("/image_converter/output_video", 1);
 
         // Define CV2 window name
@@ -35,7 +35,7 @@ public:
         namedWindow(OPENCV_WINDOW);
     }
 
-    ~ImageConverter()
+    ~DisplayROSImage()
     {
         destroyWindow(OPENCV_WINDOW);
     }
@@ -68,7 +68,7 @@ public:
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "image_converter");
-    ImageConverter ic;
+    DisplayROSImage ros_img;
     ros::spin();
     return 0;
 }
