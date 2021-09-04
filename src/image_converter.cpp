@@ -9,7 +9,6 @@
 
 using namespace cv;
 
-// Define CV2 window name
 static const std::string OPENCV_WINDOW = "Image window";
 
 // Instantiate
@@ -27,9 +26,11 @@ public:
             : it_(nh_)
     {
         // Subscribe to input video feed and publish output video feed
-        this->image_sub_ = it_.subscribe("/camera/image", 1,
+        image_sub_ = it_.subscribe("/camera/image", 1,
                                    &ImageConverter::imageCb, this);
-        this->image_pub_ = it_.advertise("/image_converter/output_video", 1);
+        image_pub_ = it_.advertise("/image_converter/output_video", 1);
+
+        // Define CV2 window name
 
         namedWindow(OPENCV_WINDOW);
     }
@@ -53,18 +54,10 @@ public:
         Mat cv_img = cv_ptr->image;
 
         // Process image
-        Mat cv_img_procd = img_proc.process_image(cv_img);
-
-        // Coords for perspective transformation (counterclockwise as used by cv::warpPerspective)
-
-        // cv::circle(cv_img, cv::Point(80, 130), 10, CV_RGB(255,0,0)); // Point 0 (Red)
-        // cv::circle(cv_img, cv::Point(280, 130), 10, CV_RGB(255,125,0)); // Point 1 (Orange)
-        // cv::circle(cv_img, cv::Point(320, 180), 10, CV_RGB(0,255,0)); // Point 2 (Green)
-        // cv::circle(cv_img, cv::Point(50, 180), 10, CV_RGB(0,0,255)); // Point 3 (Blue)
-
+        Mat processed_img = img_proc.process_image(cv_img);
 
         // Update GUI Window
-        imshow(OPENCV_WINDOW, cv_img_procd);
+        imshow(OPENCV_WINDOW, processed_img);
         waitKey(3);
 
         // Output modified video stream
@@ -78,4 +71,4 @@ int main(int argc, char** argv)
     ImageConverter ic;
     ros::spin();
     return 0;
-};
+}

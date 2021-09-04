@@ -662,6 +662,12 @@
 		<Unit filename="/home/lorenz/Projects/ROS/TurtlebotFollower/include/img_proc.h">
 			<Option target="ROSImage"/>
 		</Unit>
+		<Unit filename="/home/lorenz/Projects/ROS/TurtlebotFollower/include/lane_detection.cpp">
+			<Option target="ROSImage"/>
+		</Unit>
+		<Unit filename="/home/lorenz/Projects/ROS/TurtlebotFollower/include/lane_detection.h">
+			<Option target="ROSImage"/>
+		</Unit>
 		<Unit filename="/home/lorenz/Projects/ROS/TurtlebotFollower/src/image_converter.cpp">
 			<Option target="ROSImage"/>
 		</Unit>

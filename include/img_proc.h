@@ -20,8 +20,9 @@ using namespace std;
 
 class ImageProcessor {
 public:
-
-    Mat birdseye_view(Mat org_img);
-    Mat process_image(Mat cv_img);
+    Mat transform_img(Mat& img);
+    Mat mask_img(Mat& img);
+    Mat blur(Mat &img);
+    Mat process_image(Mat& img);
 
 };
