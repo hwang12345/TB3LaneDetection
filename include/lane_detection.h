@@ -13,6 +13,6 @@ using namespace cv;
 
 class Lane {
 public:
-    vector<Point2f> sliding_window();
+    vector<Point2f> sliding_window(Mat &img, Rect window);
 //
 };

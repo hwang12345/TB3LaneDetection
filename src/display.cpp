@@ -1,11 +1,13 @@
 #include <ros/ros.h>
 #include <image_transport/image_transport.h>
 #include <cv_bridge/cv_bridge.h>
-#include <sensor_msgs/image_encodings.h>
-#include <opencv2/imgproc/imgproc.hpp>
+// #include <sensor_msgs/image_encodings.h>
+// #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
+// #include <iostream>
+
 #include <img_proc.h>
-#include <iostream>
+#include <lane_detection.h>
 
 using namespace cv;
 
@@ -13,6 +15,7 @@ static const std::string OPENCV_WINDOW = "Image window";
 
 // Instantiate
 ImageProcessor img_proc;
+Lane lane;
 
 class DisplayROSImage
 {
@@ -55,9 +58,36 @@ public:
 
         // Process image
         Mat processed_img = img_proc.process_image(cv_img);
+        const Size img_size = processed_img.size();
+
+        const int rectangle_width = 120;
+        const int rectangle_height = 60;
+
+        // rectangle(processed_img, Rect(img_size.width * 0.5, img_size.height - rectangle_height, rectangle_width, rectangle_height), Scalar(255,255,0), 1, 8);
+
+        // Detect left-hand lane
+        vector<Point2f> detected_pts_left = lane.sliding_window(processed_img, Rect(0, img_size.height - rectangle_height, rectangle_width, rectangle_height));
+
+
+        // Detect right-hand lane
+        //vector<Point2f> detected_pts_right = lane.sliding_window(processed_img, Rect(img_size.width * 0.5, img_size.height - rectangle_height, rectangle_width, rectangle_height));
+
+        Mat out_img;
+        cvtColor(processed_img, out_img, COLOR_GRAY2BGR);
+
+        for (auto i : detected_pts_left) {
+            circle(out_img, i, 2, Scalar(255,0,0), 10);
+        }
+
+//        for (auto i : detected_pts_right) {
+//            circle(out_img, i, 2, Scalar(255, 0,0), 10);
+//        }
+
+        // for (auto i : detected_pts)
+        //    cout << i << ' ';
 
         // Update GUI Window
-        imshow(OPENCV_WINDOW, processed_img);
+        imshow(OPENCV_WINDOW, out_img);
         waitKey(3);
 
         // Output modified video stream
