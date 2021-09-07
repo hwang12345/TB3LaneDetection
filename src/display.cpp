@@ -58,16 +58,21 @@ public:
 
         // Process image
         Mat processed_img = img_proc.process_image(cv_img);
-        const Size img_size = processed_img.size();
 
+        const Size img_size = processed_img.size();
         const int rectangle_width = 120;
         const int rectangle_height = 60;
 
-        // rectangle(processed_img, Rect(img_size.width * 0.5, img_size.height - rectangle_height, rectangle_width, rectangle_height), Scalar(255,255,0), 1, 8);
+        // Get histogram of image to determine starting x-coord of sliding window
+//        Mat hist;
+//        int histSize = 256;
+//        float range[] = { 0, 256 }; //the upper boundary is exclusive
+//        const float* histRange = { range };
+//        calcHist(&processed_img, 1, 0, Mat(), hist, 1, &histSize, &histRange, true);
+//        cout << hist;
 
         // Detect left-hand lane
         vector<Point2f> detected_pts_left = lane.sliding_window(processed_img, Rect(0, img_size.height - rectangle_height, rectangle_width, rectangle_height));
-
 
         // Detect right-hand lane
         //vector<Point2f> detected_pts_right = lane.sliding_window(processed_img, Rect(img_size.width * 0.5, img_size.height - rectangle_height, rectangle_width, rectangle_height));
@@ -79,15 +84,22 @@ public:
             circle(out_img, i, 2, Scalar(255,0,0), 10);
         }
 
+        vector<Point2f> transformed_pts_left;
+
+        Mat invertedPerspectiveMatrix = img_proc.get_invPerspMatrix();
+
+        perspectiveTransform(detected_pts_left, transformed_pts_left, invertedPerspectiveMatrix);
+
+        for (int i = 0; i < transformed_pts_left.size() - 1; ++i) {
+            line(cv_img, transformed_pts_left[i], transformed_pts_left[i+1], Scalar(255,0,0), 10);
+        }
+
 //        for (auto i : detected_pts_right) {
 //            circle(out_img, i, 2, Scalar(255, 0,0), 10);
 //        }
 
-        // for (auto i : detected_pts)
-        //    cout << i << ' ';
-
         // Update GUI Window
-        imshow(OPENCV_WINDOW, out_img);
+        imshow(OPENCV_WINDOW, cv_img);
         waitKey(3);
 
         // Output modified video stream

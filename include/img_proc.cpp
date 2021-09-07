@@ -80,3 +80,27 @@ Mat ImageProcessor::process_image(Mat &img) {
     processed_img = blurred_img;
     return processed_img;
 }
+
+Mat ImageProcessor::get_invPerspMatrix() {
+    Point2f srcVertices[4];
+
+    srcVertices[0] = Point(80, 130);
+    srcVertices[1] = Point(280, 130);
+    srcVertices[2] = Point(320, 180);
+    srcVertices[3] = Point(50, 180);
+
+    //Destination vertices. Output is 640 by 480px
+    Point2f dstVertices[4];
+
+    dstVertices[0] = Point(0, 0);
+    dstVertices[1] = Point(640, 0);
+    dstVertices[2] = Point(640, 480);
+    dstVertices[3] = Point(0, 480);
+
+    // Compute transform matrix and perform homographic transformation
+    Mat perspectiveMatrix = getPerspectiveTransform(srcVertices, dstVertices);
+    Mat invertedPerspMatrix;
+    invert(perspectiveMatrix, invertedPerspMatrix);
+
+    return invertedPerspMatrix;
+}
