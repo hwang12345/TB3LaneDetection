@@ -15,10 +15,10 @@ static const std::string OPENCV_WINDOW = "Image window";
 
 // Instantiate
 ImageProcessor img_proc;
-Lane lane;
+Lane laneLeft;
+Lane laneRight;
 
-class DisplayROSImage
-{
+class DisplayROSImage {
     ros::NodeHandle nh_;
     image_transport::ImageTransport it_;
     image_transport::Subscriber image_sub_;
@@ -26,8 +26,7 @@ class DisplayROSImage
 
 public:
     DisplayROSImage()
-            : it_(nh_)
-    {
+            : it_(nh_) {
         // Subscribe to input video feed and publish output video feed
         image_sub_ = it_.subscribe("/camera/image", 1,
                                    &DisplayROSImage::imageCb, this);
@@ -38,12 +37,11 @@ public:
         namedWindow(OPENCV_WINDOW);
     }
 
-    ~DisplayROSImage()
-    {
+    ~DisplayROSImage() {
         destroyWindow(OPENCV_WINDOW);
     }
 
-    void imageCb(const sensor_msgs::ImageConstPtr& msg) {
+    void imageCb(const sensor_msgs::ImageConstPtr &msg) {
         cv_bridge::CvImagePtr cv_ptr;
         try {
             cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
@@ -72,40 +70,55 @@ public:
 //        cout << hist;
 
         // Detect left-hand lane
-        vector<Point2f> detected_pts_left = lane.sliding_window(processed_img, Rect(0, img_size.height - rectangle_height, rectangle_width, rectangle_height));
+        vector<Point2f> detected_pts_left = laneLeft.sliding_window(processed_img,
+                                                                    Rect(0, img_size.height - rectangle_height,
+                                                                         rectangle_width, rectangle_height));
+        cout << detected_pts_left.size() << endl;
 
         // Detect right-hand lane
-        //vector<Point2f> detected_pts_right = lane.sliding_window(processed_img, Rect(img_size.width * 0.5, img_size.height - rectangle_height, rectangle_width, rectangle_height));
+        vector<Point2f> detected_pts_right = laneRight.sliding_window(processed_img,
+                                                                      Rect(img_size.width - rectangle_width,
+                                                                           img_size.height - rectangle_height,
+                                                                           rectangle_width, rectangle_height));
+        cout << detected_pts_right.size() << endl;
 
         Mat out_img;
         cvtColor(processed_img, out_img, COLOR_GRAY2BGR);
 
-        for (auto i : detected_pts_left) {
-            circle(out_img, i, 2, Scalar(255,0,0), 10);
+        for (auto i: detected_pts_left) {
+            circle(out_img, i, 2, Scalar(255, 0, 0), 10);
+        }
+
+        for (auto i: detected_pts_right) {
+            circle(out_img, i, 2, Scalar(0, 0, 255), 10);
         }
 
         vector<Point2f> transformed_pts_left;
+        vector<Point2f> transformed_pts_right;
 
         Mat invertedPerspectiveMatrix = img_proc.get_invPerspMatrix();
 
         perspectiveTransform(detected_pts_left, transformed_pts_left, invertedPerspectiveMatrix);
+        perspectiveTransform(detected_pts_right, transformed_pts_right, invertedPerspectiveMatrix);
 
         for (int i = 0; i < transformed_pts_left.size() - 1; ++i) {
-            line(cv_img, transformed_pts_left[i], transformed_pts_left[i+1], Scalar(255,0,0), 10);
+            line(cv_img, transformed_pts_left[i], transformed_pts_left[i + 1], Scalar(255, 0, 0), 10);
         }
 
-//        for (auto i : detected_pts_right) {
-//            circle(out_img, i, 2, Scalar(255, 0,0), 10);
-//        }
+        for (int i = 0; i < transformed_pts_right.size() - 1; ++i) {
+            line(cv_img, transformed_pts_right[i], transformed_pts_right[i + 1], Scalar(255, 100, 0), 10);
+        }
 
         // Update GUI Window
+        imshow("BEV", out_img);
         imshow(OPENCV_WINDOW, cv_img);
         waitKey(3);
 
         // Output modified video stream
         image_pub_.publish(cv_ptr->toImageMsg());
-        }
+    }
 };
+
 
 int main(int argc, char** argv)
 {
