@@ -95,15 +95,18 @@ public:
         perspectiveTransform(detected_pts_right, transformed_pts_right, invertedPerspectiveMatrix);
 
         for (int i = 0; i < transformed_pts_right.size() - 1; ++i) {
-            line(cv_img, transformed_pts_right[i], transformed_pts_right[i + 1], Scalar(255, 100, 0), 10);
+            line(cv_img, transformed_pts_right[i], transformed_pts_right[i + 1], Scalar(0, 0, 255), 10);
             allPts.push_back(Point(transformed_pts_right[transformed_pts_right.size() - i - 1].x, transformed_pts_right[transformed_pts_right.size() - i - 1].y));
         }
 
+        // Draw lane overlay by connecting the found points of each lane
         vector<vector<Point>> arr;
         arr.push_back(allPts);
         Mat overlay = Mat::zeros(cv_img.size(), cv_img.type());
-        fillPoly(overlay, arr, Scalar(0, 255, 100));
+        fillPoly(overlay, arr, Scalar(0, 156, 100));
         addWeighted(cv_img, 1, overlay, 0.5, 0, cv_img);
+
+        resize(cv_img, cv_img, Size(700, 500));
 
         // Update GUI Window
         imshow(OPENCV_WINDOW, cv_img);
