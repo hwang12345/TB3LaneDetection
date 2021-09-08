@@ -61,6 +61,9 @@ public:
         const int rectangle_width = 120;
         const int rectangle_height = 60;
 
+        Mat invertedPerspectiveMatrix = img_proc.get_invPerspMatrix();
+        vector<Point> allPts;
+
         // Get histogram of image to determine starting x-coord of sliding window
 //        Mat hist;
 //        int histSize = 256;
@@ -73,46 +76,41 @@ public:
         vector<Point2f> detected_pts_left = laneLeft.sliding_window(processed_img,
                                                                     Rect(0, img_size.height - rectangle_height,
                                                                          rectangle_width, rectangle_height));
-        cout << detected_pts_left.size() << endl;
+
+        vector<Point2f> transformed_pts_left;
+        perspectiveTransform(detected_pts_left, transformed_pts_left, invertedPerspectiveMatrix);
+
+        for (int i = 0; i < transformed_pts_left.size() - 1; ++i) {
+            line(cv_img, transformed_pts_left[i], transformed_pts_left[i + 1], Scalar(255, 0, 0), 10);
+            allPts.push_back(Point(transformed_pts_left[i].x, transformed_pts_left[i].y));
+        }
 
         // Detect right-hand lane
         vector<Point2f> detected_pts_right = laneRight.sliding_window(processed_img,
                                                                       Rect(img_size.width - rectangle_width,
                                                                            img_size.height - rectangle_height,
                                                                            rectangle_width, rectangle_height));
-        cout << detected_pts_right.size() << endl;
 
-        Mat out_img;
-        cvtColor(processed_img, out_img, COLOR_GRAY2BGR);
-
-        for (auto i: detected_pts_left) {
-            circle(out_img, i, 2, Scalar(255, 0, 0), 10);
-        }
-
-        for (auto i: detected_pts_right) {
-            circle(out_img, i, 2, Scalar(0, 0, 255), 10);
-        }
-
-        vector<Point2f> transformed_pts_left;
         vector<Point2f> transformed_pts_right;
-
-        Mat invertedPerspectiveMatrix = img_proc.get_invPerspMatrix();
-
-        perspectiveTransform(detected_pts_left, transformed_pts_left, invertedPerspectiveMatrix);
         perspectiveTransform(detected_pts_right, transformed_pts_right, invertedPerspectiveMatrix);
-
-        for (int i = 0; i < transformed_pts_left.size() - 1; ++i) {
-            line(cv_img, transformed_pts_left[i], transformed_pts_left[i + 1], Scalar(255, 0, 0), 10);
-        }
 
         for (int i = 0; i < transformed_pts_right.size() - 1; ++i) {
             line(cv_img, transformed_pts_right[i], transformed_pts_right[i + 1], Scalar(255, 100, 0), 10);
+            allPts.push_back(Point(transformed_pts_right[transformed_pts_right.size() - i - 1].x, transformed_pts_right[transformed_pts_right.size() - i - 1].y));
         }
 
+        vector<vector<Point>> arr;
+        arr.push_back(allPts);
+        Mat overlay = Mat::zeros(cv_img.size(), cv_img.type());
+        fillPoly(overlay, arr, Scalar(0, 255, 100));
+        addWeighted(cv_img, 1, overlay, 0.5, 0, cv_img);
+
         // Update GUI Window
-        imshow("BEV", out_img);
         imshow(OPENCV_WINDOW, cv_img);
-        waitKey(3);
+        imshow("BEV", processed_img);
+
+        if (waitKey(3) == 27)
+            exit(0);
 
         // Output modified video stream
         image_pub_.publish(cv_ptr->toImageMsg());
